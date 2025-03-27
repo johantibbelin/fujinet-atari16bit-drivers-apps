@@ -1,0 +1,22 @@
+;>>>>>>> DEFAULT.PRJ for use with single module programs <<<<<<<<
+
+*                 ; name of executable program is topmost window
+
+.C [ -Y ]
+.L [ -Y ]
+
+=                  ; list of modules follows...
+
+PCSTART.O          ; startup code
+
+*              ; compile topmost window
+LOW2MID.O
+LIB\PCBGILIB.LIB       ; BGI library
+LIB\PCFLTLIB.LIB       ; floating point library
+LIB\PCSTDLIB.LIB       ; standard library
+
+LIB\PCEXTLIB.LIB       ; extended library
+LIB\PCTOSLIB.LIB       ; TOS library
+LIB\PCGEMLIB.LIB       ; AES and VDI library
+
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
