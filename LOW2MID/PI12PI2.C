@@ -7,12 +7,10 @@
 #include "low2mid.h"
 
 int main() {
-	BYTE limage[32034];
-	BYTE mimage[32034];
+	BYTE *limage;
+	BYTE *mimage;
 	BYTE *lip;
 	FILE *f = NULL;
-	char ifile[255];
-	char ofile[255];
 	char fname[20]="";
 	char path[255]="C:\*.PI1";
 	char title[60]="PI1 file to load.";
@@ -20,9 +18,11 @@ int main() {
 	int ret=0;
 	int l=0;
 	int b_read = 0;
-	int i,d;
+	int i;
 	BYTE *scrp = NULL;
 
+	limage = malloc(32034);
+	mimage = malloc(32034);
 	lip = limage;
 
 	printf("%cEPI12PI2 converter\n",27);
@@ -38,14 +38,9 @@ int main() {
 	strcat(path, fname);
 	printf("Path:%s\n",path);
 
-	f = fopen(path,"r");
+	f = fopen(path,"rb");
 	if (f == NULL) {printf("Opening file failed!\n"); goto exit;}
-	for (i=0;i<32034;i++) {
-		 d = fgetc(f);
-		if (d == EOF) break;
-		/*limage[i] = d;*/
-		b_read++;
-	} 
+	b_read = fread(limage, 1, 32034, f);
 	fclose(f);
 	printf("\nFile:%s %i bytes read.\n",fname, b_read);
 	scrp = Physbase();
@@ -53,7 +48,20 @@ int main() {
 	for (i=0;i<32000;i++) {
 		*(scrp++) = *(lip++);
 	}
+	scrp = Physbase();
+	low2mid(limage+34, scrp);
+	memcpy(mimage+34, Physbase(), 32000);
+	mimage[0]=0;
+	mimage[1]=1;
+	memcpy(mimage+2,limage+2,32);
+	f = fopen("mimage.pi2","wb");
+	if (f == NULL) { printf("Opening file failed!\n"); goto exit;}
+	b_read = fwrite(mimage, 1, 32034, f);
+	fclose(f);
+	printf("\n%i bytes written.\n", b_read);
 	exit:
 	getchar();
+	free(limage);
+	free(mimage);
 	return 0;
 }
