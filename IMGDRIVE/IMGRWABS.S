@@ -60,6 +60,22 @@ setup_imgrwabs:
 
 	move.l (sp)+,a0
 	rts
+remove_imgrwaps:
+	move.l #0,-(sp)
+	move.w #32,-(sp)
+	trap #1
+	addq.l #6,sp
+	move.l d0,s_sp
+
+	move.l old_rw, hdv_rw
+	move.l old_bpb,hdv_bpb
+	move.l old_mediach,hdv_mediach
+
+	move.l s_sp,-(sp)
+	move.w #32,-(sp)
+	trap #1
+	addq.l #6,sp
+	rts
 
 imgmediach:
 	rts
