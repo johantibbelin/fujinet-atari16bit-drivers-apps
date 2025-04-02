@@ -23,14 +23,26 @@ hdv_boot    = $47a
 hdv_mediach = $47e
 drvbits     = $4c2
 
+;*** imgrwabs routine for reading/writing disk images
+;*	 Registers used:  d1 - R/W  
+;*					  d2 - No. of sectors
+;* 					  d3 - Start sector
+;*					  d4 - Drive number
+;*					  a1 - Buffer addr. 
+
 imgrwabs:
-	move.w  4(sp),d0
-	cmp.w #1,d0
+	move.w  14(sp),d0
+	cmp.w #1,d0 ; Drive B?
 	beq cont
-	jmp (old_rw)
+	move.l old_rw,a0
+	jmp (a0)
 cont:
 	movem.l d3-d7/a2-a6,-(sp)
-	
+	move.w 44(sp),d1
+	move.w 46(sp),a1
+	move.w 50(sp),d2
+	move.w 52(sp),d3
+	move.w 54(sp),d4
 	movem.l (sp)+,d3-d7/a2-a6
 	rts 
 
