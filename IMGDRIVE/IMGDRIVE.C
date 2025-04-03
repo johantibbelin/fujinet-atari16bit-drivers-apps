@@ -20,6 +20,15 @@
 #include "imgrwabs.h"
 
 int main() {
+	FILE *f = NULL;
+	char fname[20]="";
+	char path[255]="C:\*.ST";
+	char title[60]="PI1 file to load.";
+	int ret=0;
+	int b;
 
+	printf("%cEFujinet IMG-drive",27);
+	ret = fsel_input(path,fname, &b);
+	
 	return 0;
 }
