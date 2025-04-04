@@ -9,7 +9,7 @@
 *
 * 	   Started: 2025-03-31
 *
-* Last changed: 2025-04-01
+* Last changed: 2025-04-04
 *
 *
 
@@ -48,6 +48,7 @@ cont:
 
 setup_imgrwabs:
 	move.l a0,-(sp)
+	;Super
 	move.l #0,-(sp)
 	move.w #32,-(sp)
 	trap #1
@@ -65,6 +66,7 @@ setup_imgrwabs:
 	lea imgbpb(pc),a0
 	move.l a0,hdv_bpb
 
+	;leave super
 	move.l s_sp,-(sp)
 	move.w #32,-(sp)
 	trap #1

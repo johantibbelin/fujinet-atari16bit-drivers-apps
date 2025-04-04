@@ -7,7 +7,7 @@
  *
  * Start date: 2025-03-31
  *
- * Last changed: 2025-03-31
+ * Last changed: 2025-04-03
  *
  * Version: 0.01a
  */
@@ -23,12 +23,17 @@ int main() {
 	FILE *f = NULL;
 	char fname[20]="";
 	char path[255]="C:\*.ST";
-	char title[60]="PI1 file to load.";
+	char title[60]=".ST file to load.";
 	int ret=0;
 	int b;
 
 	printf("%cEFujinet IMG-drive",27);
 	ret = fsel_input(path,fname, &b);
-	
-	return 0;
+	if (b == 0) {
+		printf("\nNo file selected!");
+		ret = -1;
+		goto exit;
+	}
+	exit:
+	return ret;
 }
