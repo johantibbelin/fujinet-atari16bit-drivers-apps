@@ -11,7 +11,8 @@ PCSTART.O          ; startup code
 
 IMGDRIVE
 
-IMGRWABS.O                 ; compile topmost window
+IMGRWABS.O
+RESET.O                 ; compile topmost window
 
 LIB\PCBGILIB.LIB       ; BGI library
 LIB\PCFLTLIB.LIB       ; floating point library

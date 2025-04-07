@@ -27,7 +27,7 @@ int main() {
 	char path[255]="C:\*.ST";
 	char title[60]=".ST file to load.";
 	int ret=0;
-	int b,l;
+	int b,l,gf;
 
 	printf("%cEFujinet IMG-drive",27);
 	ret = fsel_input(path,fname, &b);
@@ -42,7 +42,9 @@ int main() {
 	b = Fsfirst(path, 0);
 	printf("b=,%i\n\n",b);
 	goto exit;
-	f = fopen(path,"rb");
+	gf = Fopen(path,FO_READ);
+	l = Fseek(0, gf, 2);
+	printf("File len:%i\n\n",l);
 	exit:
 	getchar();
 	return ret;
