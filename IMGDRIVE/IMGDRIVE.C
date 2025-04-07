@@ -40,12 +40,10 @@ int main() {
 	path[l-5] = '\0';
 	strcat(path, fname);
 	b = Fsfirst(path, 0);
-	if (b == 0) {
-		dta = (BYTE *)Fgetdta();
-		dta = dta+26;
-		printf("\nFile size: %i\n",(LONG)*dta);
-	}
+	printf("b=,%i\n\n",b);
+	goto exit;
 	f = fopen(path,"rb");
 	exit:
+	getchar();
 	return ret;
 }
