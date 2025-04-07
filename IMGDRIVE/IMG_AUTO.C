@@ -4,9 +4,9 @@
 #include "reset.h"
 
 int main() {
-	LONG *resvec = (LONG *)0x42A;
-	LONG *resvalid =(LONG *)0x426;
-	LONG *phystop = (LONG *)0x42E;
+	LONG volatile *resvec = (LONG *)0x42A;
+	LONG volatile *resvalid =(LONG *)0x426;
+	LONG volatile *phystop = (LONG *)0x42E;
 	LONG s_sp;
 
 	s_sp = Super(0L);
