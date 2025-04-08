@@ -9,7 +9,7 @@
 
 PCSTART.O          ; startup code
 
-IMGDRIVE
+*
 
 IMGRWABS.O
 RESET.O                 ; compile topmost window

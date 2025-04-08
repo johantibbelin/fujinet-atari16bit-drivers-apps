@@ -5,10 +5,9 @@
 XREF reset
 
 reset:
-	move.l #0,-(sp)
-	move.w #32,-(sp)
-	trap #1
-
-	move.l #$4f2,a0
-	jmp (a0)
+	pea reset_st
+	move.w #$26,-(sp) ;Gemdos - Superexec
+	trap #14
+reset_st:
+	move.l 4.w,-(sp) ; OS start to stack
 	rts
