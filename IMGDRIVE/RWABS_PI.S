@@ -13,6 +13,7 @@ rwabs:	jmp rw1
 enabled:
 		ds.w $0000
 drive:	dc.w $0000
+changed:dc.w $0001
 
 rw1:	lea enabled(pc),a0
 		cmp #0,(a0)
