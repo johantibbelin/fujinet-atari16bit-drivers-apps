@@ -4,10 +4,29 @@
 *
 * written by: Johan Tibbelin (sjfroos)
 *
-* started: 2025-04-09 last changed:2025-04-09
+* started: 2025-04-09 last changed:2025-04-10
 *
 *
-XDEF rwabs, enabled, drive
+XDEF rwabs, enabled, drive, changed, setup, remove
+
+;**** EQUs
+
+hdv_init    = $46a
+hdv_bpb     = $472
+hdv_rw      = $476
+hdv_mediach = $47e
+hdv_boot    = $47a
+_nflops     = $4a6
+_drvbits    = $4c2
+
+;*** rwabs - routine for r/w disk image (ram)
+;*   Image is located +$20000 from this routine
+;*
+;*   Control registers:
+;*   enabled: base + 4  (1 for enabled)
+;*     drive: base + 8  (disk drive 0 or 1)
+;*   changed: base + 12 (1 for image change)
+;*
 
 rwabs:	jmp rw1
 enabled:
@@ -69,6 +88,13 @@ media1:	lea changed(pc),a0
 		move.w (a0),d0
 		clr.w (a0)
 		rts
-	
+;*** setup - setups the routines
+
+setup:	
+
+		; Save system vectors
+
+;*** remove	
+
 sys_rwabs:
 		ds.l 1
