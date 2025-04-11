@@ -93,8 +93,21 @@ media1:	lea changed(pc),a0
 setup:	
 
 		; Save system vectors
+		lea sys_rwabs(pc),a0
+		move.l hdv_rw,(a0)
+		lea sys_mediach(pc),a0
+		move.l hdv_mediach,(a0)
+
+		; Install routines
+		lea rwabs1(pc),a0
+		move.l (a0),hdv_rw
+		lea media(pc),a0
+		move.l (a0),hdv_mediach
+		rts
 
 ;*** remove	
 
 sys_rwabs:
+		ds.l 1
+sys_mediach:
 		ds.l 1
