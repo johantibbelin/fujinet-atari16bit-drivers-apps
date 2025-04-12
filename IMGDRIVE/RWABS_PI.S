@@ -106,6 +106,13 @@ setup:
 		rts
 
 ;*** remove	
+remove:
+		;restore sys vectors	
+		lea sys_rwabs(pc),a0
+		move.l (a0),hdv_rw
+		lea sys_mediach(pc),a0
+		move.l (a0),hdv_mediach
+		rts
 
 sys_rwabs:
 		ds.l 1
