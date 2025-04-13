@@ -41,7 +41,8 @@ rw1:	lea enabled(pc),a0
 		move.w 14(sp),d0
 		lea drive(pc),a0
 		; Our drive?
-		cmp.w d0,(a0)
+		move.w (a0),d1
+		cmp.w d0,d1
 		bne not_enabled ;No - call system rwabs
 		bra rwabs1
 
@@ -77,11 +78,13 @@ rloop:	move.b (a1)+,(a0)+
 
 ;*** Media change
 
-media:	move.w drive(pc),d0
-		cmp.w d0,4(sp)
+media:	lea drive(pc),a0
+		move.w (a0),d0
+		move.w 4(sp),d1
+		cmp.w d0,d1
 		beq media1 ;If our drive
 		; if not jump to OS routine
-		lea os_media(pc),a0
+		lea sys_mediach(pc),a0
 		jmp (a0)
 
 media1:	lea changed(pc),a0
